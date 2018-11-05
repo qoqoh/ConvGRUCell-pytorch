@@ -33,7 +33,7 @@ class ConvGRUCell(nn.Module):
         gated_hidden = torch.mul(reset_gate,hidden)
         p1           = self.Conv_ct(torch.cat((input,gated_hidden),1))
         ct           = f.tanh(p1)
-        next_h       = torch.mul(update_gate,hidden) + (1-update_gate)*ct
+        next_h       = torch.mul(update_gate,ct) + (1-update_gate)*hidden
         return next_h
  
 def test(num_seqs,channels_img,\
